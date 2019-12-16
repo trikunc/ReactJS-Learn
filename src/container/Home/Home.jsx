@@ -1,38 +1,43 @@
-import React, {Component} from 'react';
-//import YouTubeComp from '../../component/YouTubeComp/YouTubeComp';
-import Product from '../Product/Product';
+//libraries
+import React, {Component, Fragment} from 'react';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
+//pages
+import Product from '../pages/Product/Product';
+import LifeCycleComp from '../pages/LifeCycleComp/LifeCycleComp';
+import BlogPost from '../pages/BlogPost/BlogPost';
+import YoutubeCompPage from '../pages/YoutubeCompPage/YoutubeCompPage';
+import DetailPost from '../pages/BlogPost/DetailPost/DetailPost'
+
+//style
+import './Home.css';
 
 class Home extends Component{
+    state = {
+        showComponent: true
+    }
+
     render(){
         return (
-        <div>
-            {/* <p>YouTube Component</p>
-            <hr/>
-            <YouTubeComp 
-                time="7.12" 
-                title="Tutorial 1"
-                desc="Sudah ditotonton 1x"/>
-             <YouTubeComp 
-                time="8.02" 
-                title="Tutorial 2"
-                desc="Sudah ditotonton 12x"/>
-            <YouTubeComp 
-                time="5.04" 
-                title="Tutorial 3"
-                desc="Sudah ditotonton 123x"/>
-            <YouTubeComp 
-                time="4.12" 
-                title="Tutorial 4"
-                desc="Sudah ditotonton 1234x"/>
-            <YouTubeComp /> */}
-            <p>Counter</p>
-            <hr/>
-            <Product />
-        </div>
+            <Router>
+                <Fragment> 
+                    <div className="navigation">
+                        <Link to="/">Blog Post</Link>
+                        <Link to="/product">Product</Link>
+                        <Link to="/lifecycle">LifeCycle</Link>
+                        <Link to="/youtube-component">YouTube</Link>
+                    </div>
+                    <Route path="/" exact component={BlogPost} />
+                    <Route path="/detail-post/:PostId" component={DetailPost} />
+                    <Route path="/product" component={Product} />
+                    <Route path="/lifecycle" component={LifeCycleComp} />
+                    <Route path="/youtube-component" component={YoutubeCompPage} />
+                </Fragment>
+            </Router>
+
         )
     }
-    
+
 }
 
 export default Home;
